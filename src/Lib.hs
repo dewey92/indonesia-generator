@@ -2,13 +2,13 @@ module Lib where
 
 import Data.List
 
-stickerWord = "indonesia" -- will matched against "idea is one asia" -> 3 stickers
+stickerWord = "indonesia" -- will be matched against "idea is one asia" -> 3 stickers
 validChars = "indoesa"
 
 stripSpaces :: String -> String
 stripSpaces = concat . words
 
--- Needs improvement to immediately break after encoutering False
+-- Needs improvement to immediately break after encountering False
 isInputValid :: String -> Bool
 isInputValid input = case stripSpaces input of
   []     -> False
