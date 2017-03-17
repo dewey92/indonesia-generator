@@ -23,17 +23,14 @@ type Pair = (Char, Int)
 findOccurrence :: String -> [Pair]
 findOccurrence = map (\x -> (head x, length x)) . group . sort . stripSpaces
 
-letterNeeded :: [Pair] -> [Pair] -> [Pair]
+letterNeeded :: [Pair] -> [Pair] -> Int
 letterNeeded input predefined =
-  [ (c, ceiling $ ( fromIntegral(n) / fromIntegral(pn) ))
-    | (c, n)   <- input
-    , (pc, pn) <- predefined
-    , c == pc ]
-
-findMaxInPair :: [Pair] -> Int
-findMaxInPair = maximum . map (\x -> snd x)
+  maximum [ ceiling $ fromIntegral(letterCount) / fromIntegral(preLetterCount)
+    | (letter, letterCount)       <- input
+    , (preLetter, preLetterCount) <- predefined
+    , letter == preLetter ]
 
 countHowManyStickersNeeded :: String -> String -> Int
-countHowManyStickersNeeded input pre = findMaxInPair $ letterNeeded x y where
+countHowManyStickersNeeded input pre = letterNeeded x y where
   x = findOccurrence(input)
   y = findOccurrence(pre)
