@@ -8,12 +8,15 @@ validChars = "indoesa"
 stripSpaces :: String -> String
 stripSpaces = concat . words
 
--- Needs improvement to immediately break after encountering False
 isInputValid :: String -> Bool
-isInputValid input = case stripSpaces input of
-  []     -> False
-  [x]    -> isInfixOf [x] validChars
-  (x:xs) -> isInfixOf [x] validChars && isInputValid xs
+isInputValid input = checkValid (stripSpaces input) True where
+  checkValid strippedInput lastResult
+    | lastResult == False = False
+    | lastResult == True = do
+      case strippedInput of
+        []     -> False
+        [x]    -> isInfixOf [x] validChars
+        (x:xs) -> checkValid xs $ isInfixOf [x] validChars
 
 type Pair = (Char, Int)
 

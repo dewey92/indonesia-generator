@@ -38,4 +38,4 @@ test-suite indonesia-generator-test
 
 source-repository head
   type:     git
-  location: https://github.com/githubuser/indonesia-generator
+  location: https://github.com/dewey92/indonesia-generator
